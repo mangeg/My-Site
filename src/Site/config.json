@@ -1,0 +1,9 @@
+﻿{
+    "AppSettings": {
+    },
+    "Data": {
+        "DefaultConnection": {
+            ConnectionString: "Server=(localdb)\\mssqllocaldb;Database=MySiteDb;Trusted_Connection=True;MultipleActiveResultSets=true",
+        }
+    }
+}

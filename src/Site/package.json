@@ -1,0 +1,9 @@
+{
+    "version": "1.0.0",
+    "name": "Site",
+    "private": true,
+    "devDependencies": {
+        "gulp": "^3.9.0",
+        "gulp-load-plugins": "^1.0.0"
+    }
+}
