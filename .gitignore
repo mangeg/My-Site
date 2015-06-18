@@ -190,3 +190,11 @@ _Pvt_Extensions/
 ModelManifest.xml
 
 **/.vs
+*/Site/wwwroot/js/app/**/*.js
+*/Site/wwwroot/js/app/**/*.map
+*/Site/wwwroot/js/framework/**/*.js
+*/Site/wwwroot/js/framework/**/*.map
+*/Site/App/**/*.js
+*/Site/App/**/*.map
+*/Site/FrameworkModules/**/*.js
+*/Site/FrameworkModules/**/*.map
