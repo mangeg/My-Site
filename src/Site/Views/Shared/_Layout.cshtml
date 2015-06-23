@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>My-Site</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="The description of my page" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/toaster/toaster.css" />
+    <!-- endbower -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/content/css/site.css">
+    <!-- endinject -->
+
+</head>
+<body>
+    @RenderBody()
+
+    <!-- bower:js -->
+    <script src="/js/lib/jquery/dist/jquery.js"></script>
+    <script src="/js/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/js/lib/angularjs/angular.js"></script>
+    <script src="/js/lib/angular/angular.js"></script>
+    <script src="/js/lib/angular-animate/angular-animate.js"></script>
+    <script src="/js/lib/toaster/toaster.js"></script>
+    <!-- endbower -->
+    <!-- inject:js -->
+    <script src="/js/framework/menu/menu.module.js"></script>
+    <script src="/js/app/app.module.js"></script>
+    <!-- endinject -->
+    @RenderSection( "scripts", false )
+</body>
+</html>

@@ -190,11 +190,10 @@ _Pvt_Extensions/
 ModelManifest.xml
 
 **/.vs
-*/Site/wwwroot/js/app/**/*.js
-*/Site/wwwroot/js/app/**/*.map
-*/Site/wwwroot/js/framework/**/*.js
-*/Site/wwwroot/js/framework/**/*.map
+*/Site/wwwroot/js/app/**/*
 */Site/App/**/*.js
-*/Site/App/**/*.map
-*/Site/FrameworkModules/**/*.js
-*/Site/FrameworkModules/**/*.map
+*.js.map
+*.css.map
+*.d.ts
+!tsd.d.ts
+!typescriptApp.d.ts

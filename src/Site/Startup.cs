@@ -1,10 +1,11 @@
 ﻿namespace Site
 {
     using Microsoft.AspNet.Builder;
+    using Microsoft.AspNet.Diagnostics;
     using Microsoft.AspNet.Hosting;
-    using Microsoft.AspNet.Http;
     using Microsoft.Framework.ConfigurationModel;
     using Microsoft.Framework.DependencyInjection;
+    using Microsoft.Framework.Logging;
 
     public class Startup
     {
@@ -25,11 +26,28 @@
         public void ConfigureServices( IServiceCollection services )
         {
             services.AddSingleton( s => Configuration );
+            services.AddMvc();
         }
 
-        public void Configure( IApplicationBuilder app )
+        public void Configure( IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory )
         {
-            app.Run( async ( context ) => { await context.Response.WriteAsync( "Hello World!" ); } );
+            loggerfactory.AddConsole( LogLevel.Information );
+
+            if ( env.IsEnvironment( "Development" ) )
+            {
+                app.UseErrorPage( ErrorPageOptions.ShowAll );
+            }
+
+            app.UseStaticFiles();
+
+            app.UseMvc(
+                routes =>
+                {
+                    routes.MapRoute(
+                        "default",
+                        "{controller}/{action}/{id?}",
+                        new { controller = "Home", action = "Index" } );
+                } );
         }
     }
 }
