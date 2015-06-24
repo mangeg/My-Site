@@ -35,6 +35,8 @@
         ];
         this.jsOrder = [
             "**/app.module.js",
+            "**/blocks/**/*.module.js",
+            "**/blocks/**/*.js",
             "**/*.module.js",
             "**/*.js"
         ];

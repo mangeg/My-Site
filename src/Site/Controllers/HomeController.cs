@@ -1,6 +1,5 @@
 ﻿namespace Site.Controllers
 {
-    using System;
     using Microsoft.AspNet.Mvc;
 
     public class HomeController : Controller

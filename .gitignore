@@ -189,8 +189,10 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 
+.settings
 **/.vs
 */Site/wwwroot/js/app/**/*
+*/Site/wwwroot/js/lib/**/*
 */Site/App/**/*.js
 *.js.map
 *.css.map

@@ -13,7 +13,7 @@ var tsProj = $.typescript.createProject( {
     declarationFiles: false,
     module: "commonjs",
     noImplicitAny: true,
-    removeComments: true
+    removeComments: false
 } );
 
 gulp.task( "help", $.taskListing );
@@ -120,6 +120,8 @@ gulp.task( "wiredep", function() {
     var allDeps = wiredep();
     var copyJs = gulp.src( allDeps.js, { base: "./bower_components" } )
         .pipe( gulp.dest( config.jsLib ) );
+    var copyCss = gulp.src( allDeps.css, { base: "./bower_components" } )
+        .pipe( gulp.dest( config.jsLib ) );
 
     var js = gulp.src( [config.index] )
         .pipe( wiredepStream( {
@@ -127,7 +129,8 @@ gulp.task( "wiredep", function() {
             fileTypes: {
                 html: {
                     replace: {
-                        js: "<script src=\"/js/lib{{filePath}}\"></script>"
+                        js: "<script src=\"/js/lib{{filePath}}\"></script>",
+                        css: "<link rel=\"stylesheet\" href=\"js/lib{{filePath}}\" />"
                     }
                 }
             }
@@ -138,7 +141,7 @@ gulp.task( "wiredep", function() {
         .pipe( wiredepStream( {} ) )
         .pipe( gulp.dest( config.lessRoot ) );
 
-    return merge( [js, less, copyJs] );
+    return merge( [js, less, copyJs, copyCss] );
 } );
 
 gulp.task( "build", $.sequence( "clean", ["compile", "ts-lint", "gen-ts-refs"], "inject", "wiredep" ) );
