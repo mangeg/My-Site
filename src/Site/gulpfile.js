@@ -21,37 +21,50 @@ gulp.task( "default", ["help"] );
 
 gulp.task( "watch", ["watch-ts", "watch-less", "watch-html"], function() {} );
 gulp.task( "watch-ts", function() {
-    return gulp.watch( config.tsAll, ["compile-ts-app", "ts-lint", "gen-ts-refs"] )
-        .on( "change", changeEvent );
+    log( "Watching for TypeScript changes..." );
+    $.watch( config.tsAll, { verbose: true, name: "TS-W" }, function( event ) {
+        if( event.event === "change" || event.evet === "add" ) {
+            if( event.evet === "add" )
+                gulp.start( "compile-ts", "ts-lint", "gen-ts-refs", "wiredep" );
+            else
+                gulp.start( "compile-ts", "ts-lint", "gen-ts-refs" );
+        }
+        if ( event.event === "unlink" ) {
+            gulp.start( "build" );
+        }
+    } );
 } );
 gulp.task( "watch-less", function() {
-    return gulp.watch( config.lessAll, ["compile-less"] )
-        .on( "change", changeEvent );
+    log( "Watching for LESS changes..." );
+    $.watch( config.lessAll, { verbose: true, name: "LESS-W" }, function( event ) {
+        gulp.start( "compile-less" );
+    } );
 } );
 gulp.task( "watch-html", function() {
-    return gulp.watch( config.htmlAll )
-        .on( "change", function( event ) {
+    log( "Watching HTML-file changes..." );
+    $.watch( config.htmlAll, { verbose: true, name: "HTML-W" }, function( event ) {
+        if ( event.event !== "unlink" ) {
             gulp.src( event.path, { base: "./App" } )
                 .pipe( gulp.dest( config.jsAppRoot ) );
-            changeEvent( event );
-        } );
+        }
+    } );
 } );
 
-gulp.task( "compile", ["compile-ts-app", "compile-less"], function() {
+gulp.task( "compile", ["compile-ts", "compile-less"], function() {
     return gulp.src( config.htmlAll )
         .pipe( gulp.dest( config.jsAppRoot ) );
 } );
-gulp.task( "compile-ts-app", function() {
-    log( "Compiling TypeScript App -> JavaScript" );
+gulp.task( "compile-ts", function() {
+    log( "Compiling TypeScript => JavaScript" );
 
-    var frameworkBuild = gulp.src( config.tsAllApp )
+    var compile = gulp.src( config.tsAllApp )
         .pipe( $.plumber() )
         .pipe( $.sourcemaps.init() )
         .pipe( $.typescript( tsProj ) );
 
     return merge( [
-        frameworkBuild.dts.pipe( gulp.dest( config.tsTypings ) ),
-        frameworkBuild.js
+        compile.dts.pipe( gulp.dest( config.tsTypings ) ),
+        compile.js
         .pipe( $.plumber() )
         .pipe( $.rename( function( path ) {
             path.dirname = path.dirname.toLowerCase();
@@ -62,6 +75,8 @@ gulp.task( "compile-ts-app", function() {
     ] );
 } );
 gulp.task( "compile-less", function() {
+    log( "Compiling LESS => CSS" );
+
     return gulp.src( config.lessAll )
         .pipe( $.plumber() )
         .pipe( $.sourcemaps.init() )

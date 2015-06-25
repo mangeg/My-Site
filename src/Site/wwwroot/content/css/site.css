@@ -6696,8 +6696,47 @@ button.close {
     display: none !important;
   }
 }
+* {
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+}
 body {
-  background-color: aliceblue;
+  font-size: 13px;
+  line-height: 23px;
+  color: #666;
+  background: #111;
+  padding-top: 45px;
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: #333;
+  text-decoration: none !important;
+}
+a:hover {
+  color: #888;
+  text-decoration: none;
+}
+a:hover,
+a:focus,
+a:active {
+  outline: 0;
+}
+:focus {
+  outline: none;
+}
+::-moz-focus-inner {
+  border: 0;
+}
+.navbar .nav > li > a {
+  font-size: 13px !important;
+  color: #fff !important;
+}
+.navbar .navbar-brand {
+  color: #fff !important;
+  margin: 0 1em;
+  height: 45px;
+}
+.navbar-inverse {
+  background-color: #333;
 }
 
 /*# sourceMappingURL=site.css.map */

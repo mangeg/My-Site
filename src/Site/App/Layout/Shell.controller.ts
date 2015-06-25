@@ -8,9 +8,15 @@ module App.Layout {
 
         constructor( private $rootScope: ng.IRootScopeService,
             private logger: Blocks.Logger.ILogger,
-            private config: App.Core.IConfig ) {
+            private config: Core.IConfig ) {
             this.logger.success( config.appTitle + " loaded!" );
         }
+
+        navline = {
+            title: this.config.appTitle,
+            text: "Created by Magnus G",
+            link: "http://twitter.com/magnusgid"
+        };
     }
 
     angular

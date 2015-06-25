@@ -15,7 +15,7 @@ module Blocks.Router {
             private $location: ng.ILocationService,
             private $rootScope: ng.IRootScopeService,
             private $state: ng.ui.IState,
-            private logger: Blocks.Logger.ILogger ) {
+            private logger: Logger.ILogger ) {
             this.handleRoutingErrors();
         }
 

@@ -8,7 +8,7 @@ module App.Core {
         appTitle: string;
     }
 
-    var config = {
+    var config: IConfig = {
         appErrorPrefix: "[My-Site Error] ",
         appTitle: "My-Site"
     };
@@ -19,6 +19,7 @@ module App.Core {
         constructor( toastr: Toastr ) {
             toastr.options.timeOut = 4000;
             toastr.options.positionClass = "toast-bottom-right";
+            toastr.options.progressBar = true;
         }
     }
 
