@@ -1,8 +1,8 @@
-﻿/// <reference path="../tools/typings/typescriptApp.d.ts" />
-
-"use strict";
-
+﻿/// <reference path="../tools/typings/tsd.d.ts" />
 module App {
-    angular
-        .module( "app", ["app.core"] );
+    "use strict";
+    angular.module( "app", [
+        "app.core",
+        "app.layout"
+    ] );
 }

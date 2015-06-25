@@ -54,6 +54,13 @@
         this.tsTypingsAppReference = this.tsTypings + "typescriptApp.d.ts";
 
         /*
+         * HTML
+         */
+        this.htmlAllApp = this.appRoot + "**/*.html";
+        this.htmlAll = [this.htmlAllApp];
+        this.htmlGenerated = this.jsAppRoot + "/**/*.html";
+
+        /*
          * Index
          */
         this.layoutHome = "./Views/Shared/";

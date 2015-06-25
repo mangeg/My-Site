@@ -19,7 +19,7 @@ var tsProj = $.typescript.createProject( {
 gulp.task( "help", $.taskListing );
 gulp.task( "default", ["help"] );
 
-gulp.task( "watch", ["watch-ts", "watch-less"], function() {} );
+gulp.task( "watch", ["watch-ts", "watch-less", "watch-html"], function() {} );
 gulp.task( "watch-ts", function() {
     return gulp.watch( config.tsAll, ["compile-ts-app", "ts-lint", "gen-ts-refs"] )
         .on( "change", changeEvent );
@@ -28,8 +28,19 @@ gulp.task( "watch-less", function() {
     return gulp.watch( config.lessAll, ["compile-less"] )
         .on( "change", changeEvent );
 } );
+gulp.task( "watch-html", function() {
+    return gulp.watch( config.htmlAll )
+        .on( "change", function( event ) {
+            gulp.src( event.path, { base: "./App" } )
+                .pipe( gulp.dest( config.jsAppRoot ) );
+            changeEvent( event );
+        } );
+} );
 
-gulp.task( "compile", ["compile-ts-app", "compile-less"] );
+gulp.task( "compile", ["compile-ts-app", "compile-less"], function() {
+    return gulp.src( config.htmlAll )
+        .pipe( gulp.dest( config.jsAppRoot ) );
+} );
 gulp.task( "compile-ts-app", function() {
     log( "Compiling TypeScript App -> JavaScript" );
 
@@ -65,6 +76,9 @@ gulp.task( "compile-less", function() {
 } );
 
 gulp.task( "clean", ["clean-generated-js", "clean-generated-css"], function() {
+    log( "Cleaning generated HTML" );
+    return gulp.src( config.htmlGenerated )
+        .pipe( $.clean() );
 } );
 gulp.task( "clean-generated-js", function() {
     log( "Cleaning up generated JS" );

@@ -35,6 +35,7 @@
 
             if ( env.IsEnvironment( "Development" ) )
             {
+                app.UseBrowserLink();
                 app.UseErrorPage( ErrorPageOptions.ShowAll );
             }
 
@@ -45,7 +46,7 @@
                 {
                     routes.MapRoute(
                         "default",
-                        "{controller}/{action}/{id?}",
+                        "{*url}",
                         new { controller = "Home", action = "Index" } );
                 } );
         }

@@ -3,3 +3,4 @@
 /// <reference path="angularjs/angular-route.d.ts" />
 /// <reference path="angularjs/angular-animate.d.ts" />
 /// <reference path="toastr/toastr.d.ts" />
+/// <reference path="angular-ui-router/angular-ui-router.d.ts" />

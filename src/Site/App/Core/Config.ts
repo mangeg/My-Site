@@ -3,16 +3,21 @@
 module App.Core {
     "use strict";
 
+    export interface IConfig {
+        appErrorPrefix: string;
+        appTitle: string;
+    }
+
     var config = {
-        appErrorPrefix: "[helloworld Error] ",
-        appTitle: "helloworld"
+        appErrorPrefix: "[My-Site Error] ",
+        appTitle: "My-Site"
     };
 
     class ToastrConfig {
         static $inject = ["toastr"];
 
         constructor( toastr: Toastr ) {
-            toastr.options.timeOut = 800;
+            toastr.options.timeOut = 4000;
             toastr.options.positionClass = "toast-bottom-right";
         }
     }
@@ -24,12 +29,13 @@ module App.Core {
             if ( $logProvider.debugEnabled ) {
                 $logProvider.debugEnabled( true );
             }
-            exceptionHandlerProvider.configure(config.appErrorPrefix);
+            exceptionHandlerProvider.configure( config.appErrorPrefix );
         }
     }
 
     angular
         .module( "app.core" )
         .config( ToastrConfig )
-        .config( ExceptionConfigure );
+        .config( ExceptionConfigure )
+        .value( "config", config );
 }

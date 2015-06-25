@@ -5,6 +5,9 @@ module App.Core {
 
     angular
         .module( "app.core", [
-            "blocks.exception", "blocks.logger"
+            "blocks.exception",
+            "blocks.logger",
+            "blocks.router",
+            "ui.router"
         ] );
 }

@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html ng-app="app">
 <head>
     <title>My-Site</title>
+    <base href="/"/>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="The description of my page" />
@@ -16,24 +17,30 @@
 
 </head>
 <body>
+    <div ng-include="'/js/app/layout/shell.html'"></div>
     @RenderBody()
-
     <!-- bower:js -->
     <script src="/js/lib/jquery/dist/jquery.js"></script>
     <script src="/js/lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="/js/lib/angularjs/angular.js"></script>
     <script src="/js/lib/toastr/toastr.js"></script>
+    <script src="/js/lib/angular/angular.js"></script>
+    <script src="/js/lib/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
     <!-- inject:js -->
     <script src="/js/app/app.module.js"></script>
     <script src="/js/app/blocks/exception/exception.module.js"></script>
     <script src="/js/app/blocks/logger/logger.module.js"></script>
+    <script src="/js/app/blocks/router/router-helper.module.js"></script>
     <script src="/js/app/blocks/exception/exception-handler.provider.js"></script>
     <script src="/js/app/blocks/exception/exception.js"></script>
     <script src="/js/app/blocks/logger/logger.js"></script>
+    <script src="/js/app/blocks/router/router-helper.service.js"></script>
     <script src="/js/app/core/core.module.js"></script>
+    <script src="/js/app/Layout/layout.module.js"></script>
     <script src="/js/app/core/config.js"></script>
     <script src="/js/app/core/constants.js"></script>
+    <script src="/js/app/core/core.router.js"></script>
+    <script src="/js/app/Layout/shell.controller.js"></script>
     <!-- endinject -->
     @RenderSection( "scripts", false )
 </body>
