@@ -6736,7 +6736,33 @@ a:active {
   height: 45px;
 }
 .navbar-inverse {
+  background-color: #333333;
+}
+/* Sidebar */
+.sidebar {
+  width: 230px;
+  float: left;
+  display: block;
+  background: #111;
+  color: #eee;
+  position: relative;
+}
+.sidebar .sidebar-inner {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  position: absolute;
+  z-index: 60;
+  background: #111;
+}
+.sidebar .sidebar-filler {
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
   background-color: #333;
+  width: 230px;
 }
 
 /*# sourceMappingURL=site.css.map */

@@ -1,3 +1,6 @@
 ﻿<div ng-controller="SidebarController as vm">
-    
+    <site-sidebar when-done-animating="vm.sidebarReady()">
+        <div class="sidebar-filler"></div>
+        <div class="sidebar-inner"></div>
+    </site-sidebar>
 </div>

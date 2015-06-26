@@ -17,11 +17,11 @@ module App.Layout {
         states = <IStateExtra[]>this.$state.get();
 
         isCurrent( route: { title: string }) {
-            const currentState: any = this.$state.current;
+            var currentState: any = this.$state.current;
             if ( !route.title || !currentState || !currentState.title ) {
                 return "";
             }
-            const menuName = route.title;
+            var menuName = route.title;
             return currentState.title.substr( 0, menuName.length ) === menuName ? "current" : "";
         }
 

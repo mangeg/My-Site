@@ -35,7 +35,7 @@
 
             if ( env.IsEnvironment( "Development" ) )
             {
-                app.UseBrowserLink();
+                //app.UseBrowserLink();
                 app.UseErrorPage( ErrorPageOptions.ShowAll );
             }
 

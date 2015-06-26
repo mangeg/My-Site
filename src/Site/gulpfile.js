@@ -23,11 +23,12 @@ gulp.task( "watch", ["watch-ts", "watch-less", "watch-html"], function() {} );
 gulp.task( "watch-ts", function() {
     log( "Watching for TypeScript changes..." );
     $.watch( config.tsAll, { verbose: true, name: "TS-W" }, function( event ) {
-        if( event.event === "change" || event.evet === "add" ) {
-            if( event.evet === "add" )
+        if( event.event === "change" || event.event === "add" ) {
+            if (event.event === "add")
+                //gulp.start($.sequence("compile-ts", "ts-lint", "gen-ts-refs", "wiredep"));
                 gulp.start( "compile-ts", "ts-lint", "gen-ts-refs", "wiredep" );
             else
-                gulp.start( "compile-ts", "ts-lint", "gen-ts-refs" );
+                gulp.start( "compile-ts", "ts-lint" );
         }
         if ( event.event === "unlink" ) {
             gulp.start( "build" );
