@@ -1,5 +1,12 @@
-﻿<section class="mainbar">
+﻿<section class="mainbar dota">
     <div class="content">
-        <h1>Dota</h1>
+        <h1>Dota {{vm.filtereddHeros.length}}/{{vm.heroes.length}}</h1>
+        <input ng-model="vm.heroFilter" type="text" placeholder="Hero name filter" ng-change="vm.filterChanged()"/>
+        <ul>
+            <li ng-repeat="hero in vm.filtereddHeros" class="hero">
+                <img ng-src="{{hero.imagePathSmallHorizontalPortrait}}"/>
+                {{hero.localizedName}}
+            </li>
+        </ul>
     </div>
 </section>

@@ -1,11 +1,16 @@
 ﻿namespace Site
 {
+    using Data;
+    using Dota2.SteamService;
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Diagnostics;
     using Microsoft.AspNet.Hosting;
+    using Microsoft.AspNet.Mvc;
+    using Microsoft.Data.Entity;
     using Microsoft.Framework.ConfigurationModel;
     using Microsoft.Framework.DependencyInjection;
     using Microsoft.Framework.Logging;
+    using Newtonsoft.Json.Serialization;
 
     public class Startup
     {
@@ -26,7 +31,21 @@
         public void ConfigureServices( IServiceCollection services )
         {
             services.AddSingleton( s => Configuration );
-            services.AddMvc();
+            services.AddMvc().Configure<MvcOptions>(
+                options =>
+                {
+                    var jsonOutFormatter = options.OutputFormatters.InstanceOf<JsonOutputFormatter>();
+                    jsonOutFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+                } );
+
+            services.AddEntityFramework()
+                .AddSqlServer()
+                .AddDbContext<MyContext>(
+                    d => { d.UseSqlServer( Configuration["Data:DefaultConnection:ConnectionString"] ); } );
+
+            services.Configure<SteamServiceOptions>( Configuration.GetSubKey( "AppSettings" ) );
+            services.AddTransient<IDotaService, DotaService>();
         }
 
         public void Configure( IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory )
