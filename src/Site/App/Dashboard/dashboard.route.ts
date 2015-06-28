@@ -1,15 +1,5 @@
-﻿/// <reference path="../../tools/typings/typescriptapp.d.ts" />
-
-module App.Dashboard {
+﻿module App.Dashboard {
     "use strict";
-
-    configureStates.$inject = ["$stateProvider"];
-    function configureStates( $stateProvider: ng.ui.IStateProvider ) {
-        var states = getStates();
-        states.forEach( function ( state ) {
-            $stateProvider.state( state.state, state.config );
-        });
-    }
 
     function getStates() {
         return [
@@ -23,14 +13,25 @@ module App.Dashboard {
                     title: "dashboard",
                     settings: {
                         nav: 1,
-                        content: "<i class=\"fa fa-dashboard\"></i> Dashboard"
+                        content: "<span class=\"glyphicon glyphicon-dashboard\"></span>Dashboard"
                     }
                 }
             }
         ];
     }
 
+    class ConfigureStates {
+        static $inject = ["$stateProvider"];
+
+        constructor( $stateProvider: ng.ui.IStateProvider ) {
+            const states = getStates();
+            states.forEach( state => {
+                $stateProvider.state( state.state, state.config );
+            });
+        }
+    }
+
     angular
         .module( "app.dashboard" )
-        .config( configureStates );
+        .config( ConfigureStates );
 }

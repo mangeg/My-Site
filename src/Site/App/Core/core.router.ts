@@ -1,6 +1,4 @@
-﻿/// <reference path="../../tools/typings/typescriptapp.d.ts" />
-
-module App.Core {
+﻿module App.Core {
     "use strict";
 
     class AppRun {

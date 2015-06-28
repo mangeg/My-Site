@@ -1,6 +1,4 @@
-﻿/// <reference path="../../tools/typings/typescriptapp.d.ts" />
-
-module App.Layout {
+﻿module App.Layout {
     "use strict";
 
     interface IHtSidebarScope {
@@ -17,14 +15,14 @@ module App.Layout {
 
         bindToController: boolean = true;
         link: ( scope: ng.IScope, element: ng.IAugmentedJQuery, attrs: ng.IAttributes ) => void = this.linkFn;
-        restrict: string = "EA";
+        restrict = "EA";
         scope: IHtSidebarScope = {
             whenDoneAnimating: "&?"
         };
 
         private linkFn( scope: any, element: any, attrs: any ) {
-            var $sidebarInner = element.find( ".sidebar-inner" );
-            var $dropdownElement = element.find( ".sidebar-dropdown a" );
+            const $sidebarInner = element.find( ".sidebar-inner" );
+            const $dropdownElement = element.find( ".sidebar-dropdown a" );
             element.addClass( "sidebar" );
             /*$dropdownElement.click( dropdown );
 

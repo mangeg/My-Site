@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- bower:css -->
+    <link rel="stylesheet" href="js/lib/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="js/lib/toastr/toastr.css" />
     <!-- endbower -->
     <!-- inject:css -->
@@ -21,10 +22,12 @@
     @RenderBody()
     <!-- bower:js -->
     <script src="/js/lib/jquery/dist/jquery.js"></script>
+    <script src="/js/lib/angular/angular.js"></script>
+    <script src="/js/lib/angular-animate/angular-animate.js"></script>
+    <script src="/js/lib/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/js/lib/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/js/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="/js/lib/toastr/toastr.js"></script>
-    <script src="/js/lib/angular/angular.js"></script>
-    <script src="/js/lib/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
     <!-- inject:js -->
     <script src="/js/app/app.module.js"></script>
@@ -38,6 +41,8 @@
     <script src="/js/app/core/core.module.js"></script>
     <script src="/js/app/dashboard/dashboard.module.js"></script>
     <script src="/js/app/layout/layout.module.js"></script>
+    <script src="/js/app/sections/blog/blog.module.js"></script>
+    <script src="/js/app/sections/Dota/dota.module.js"></script>
     <script src="/js/app/core/config.js"></script>
     <script src="/js/app/core/constants.js"></script>
     <script src="/js/app/core/core.router.js"></script>
@@ -47,6 +52,10 @@
     <script src="/js/app/layout/sidebar.controller.js"></script>
     <script src="/js/app/layout/site-sidebar.directive.js"></script>
     <script src="/js/app/layout/site-top-nav.directive.js"></script>
+    <script src="/js/app/sections/blog/blog.controller.js"></script>
+    <script src="/js/app/sections/blog/blog.route.js"></script>
+    <script src="/js/app/sections/Dota/dota.controller.js"></script>
+    <script src="/js/app/sections/Dota/dota.route.js"></script>
     <!-- endinject -->
     @RenderSection( "scripts", false )
 </body>

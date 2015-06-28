@@ -1,10 +1,10 @@
-﻿/// <reference path="../../Tools/Typings/typescriptApp.d.ts"/>
-
-module App.Core {
+﻿module App.Core {
     "use strict";
 
     angular
         .module( "app.core", [
+            "ngSanitize",
+            "ngAnimate",
             "blocks.exception",
             "blocks.logger",
             "blocks.router",

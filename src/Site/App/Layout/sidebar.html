@@ -1,6 +1,12 @@
 ﻿<div ng-controller="SidebarController as vm">
     <site-sidebar when-done-animating="vm.sidebarReady()">
         <div class="sidebar-filler"></div>
-        <div class="sidebar-inner"></div>
+        <div class="sidebar-inner">
+            <ul>
+                <li ng-repeat="r in vm.navRoutes" ng-class="vm.isCurrent(r)">
+                    <a ui-sref="{{r.name}}" ng-bind-html="r.settings.content"></a>
+                </li>
+            </ul>
+        </div>
     </site-sidebar>
 </div>

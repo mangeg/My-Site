@@ -1,6 +1,4 @@
-﻿/// <reference path="../../tools/typings/typescriptapp.d.ts" />
-
-module App.Layout {
+﻿module App.Layout {
     "use strict";
 
     export interface IStateExtra extends ng.ui.IState {
@@ -17,11 +15,11 @@ module App.Layout {
         states = <IStateExtra[]>this.$state.get();
 
         isCurrent( route: { title: string }) {
-            var currentState: any = this.$state.current;
+            const currentState: any = this.$state.current;
             if ( !route.title || !currentState || !currentState.title ) {
                 return "";
             }
-            var menuName = route.title;
+            const menuName = route.title;
             return currentState.title.substr( 0, menuName.length ) === menuName ? "current" : "";
         }
 

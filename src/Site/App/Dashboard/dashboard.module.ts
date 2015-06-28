@@ -1,6 +1,4 @@
-﻿/// <reference path="../../tools/typings/typescriptapp.d.ts" />
-
-module App.Dashboard {
+﻿module App.Dashboard {
     "use strict";
 
     angular

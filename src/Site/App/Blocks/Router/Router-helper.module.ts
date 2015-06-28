@@ -1,6 +1,4 @@
-﻿/// <reference path="../../../tools/typings/typescriptapp.d.ts" />
-
-module Blocks.Router {
+﻿module Blocks.Router {
     "use strict";
 
     angular

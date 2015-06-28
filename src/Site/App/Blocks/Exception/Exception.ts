@@ -1,6 +1,4 @@
-﻿/// <reference path="../../../Tools/Typings/typescriptApp.d.ts"/>
-
-module Blocks.Exception {
+﻿module Blocks.Exception {
     export interface IException {
         catcher: (message: string) => (reason: string) => void;
     }

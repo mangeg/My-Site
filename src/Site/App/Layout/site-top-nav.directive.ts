@@ -1,6 +1,4 @@
-﻿/// <reference path="../../tools/typings/typescriptapp.d.ts" />
-
-module App.Layout {
+﻿module App.Layout {
     "use strict";
 
     interface IHtTopNavScope {

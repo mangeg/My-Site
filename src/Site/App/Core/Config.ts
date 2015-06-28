@@ -1,6 +1,4 @@
-﻿/// <reference path="../../Tools/Typings/typescriptApp.d.ts"/>
-
-module App.Core {
+﻿module App.Core {
     "use strict";
 
     export interface IConfig {

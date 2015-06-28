@@ -1,6 +1,4 @@
-﻿/// <reference path="../../../tools/typings/typescriptapp.d.ts" />
-
-module Blocks.Router {
+﻿module Blocks.Router {
     "use strict";
 
     export interface IRouterHelper {
@@ -17,6 +15,8 @@ module Blocks.Router {
             private $state: ng.ui.IState,
             private logger: Logger.ILogger ) {
             this.handleRoutingErrors();
+            this.handleStateChangeStart();
+            this.handleStateChanges();
         }
 
         stateCounts = { errors: 0, changes: 0 };
@@ -39,15 +39,23 @@ module Blocks.Router {
                 this.$location.path( "/" );
             } );
         }
+
         private handleStateChanges() {
             this.$rootScope.$on( "$stateChangeSuccess",
-                ( event: any, toState: any, toParams: any, fromState: any, fromParams: any, error: any ) => {
-                    this.stateCounts.changes++;
-                    this.handlingStateChangeError = false;
-                    //var title = config.docTitle + ' ' + (toState.title || '');
-                    //var title = ( toState.title || '' );
-                    //this.$rootScope.title = title; // data bind to <title>
-                });
+            ( event: any, toState: any, toParams: any, fromState: any, fromParams: any, error: any ) => {
+                this.logger.info( `View changed to ${toState.name}` );
+                this.stateCounts.changes++;
+                this.handlingStateChangeError = false;
+                //var title = config.docTitle + ' ' + (toState.title || '');
+                //var title = ( toState.title || '' );
+                //this.$rootScope.title = title; // data bind to <title>
+            } );
+        }
+
+        private handleStateChangeStart() {
+            this.$rootScope.$on( "$stateChangeStart", ( event: any, toState: any, toParams: any, fromState: any, fromParams: any ) => {
+                //this.logger.info( `Starting state change ${fromState.name} => ${toState.name}` );
+            } );
         }
     }
 

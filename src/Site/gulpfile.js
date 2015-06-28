@@ -23,9 +23,9 @@ gulp.task( "watch", ["watch-ts", "watch-less", "watch-html"], function() {} );
 gulp.task( "watch-ts", function() {
     log( "Watching for TypeScript changes..." );
     $.watch( config.tsAll, { verbose: true, name: "TS-W" }, function( event ) {
-        if( event.event === "change" || event.event === "add" ) {
-            if (event.event === "add")
-                //gulp.start($.sequence("compile-ts", "ts-lint", "gen-ts-refs", "wiredep"));
+        if ( event.event === "change" || event.event === "add" ) {
+            if ( event.event === "add" )
+            //gulp.start( $.sequence( "compile-ts", "ts-lint", "gen-ts-refs", "wiredep" ) );
                 gulp.start( "compile-ts", "ts-lint", "gen-ts-refs", "wiredep" );
             else
                 gulp.start( "compile-ts", "ts-lint" );
@@ -78,11 +78,11 @@ gulp.task( "compile-ts", function() {
 gulp.task( "compile-less", function() {
     log( "Compiling LESS => CSS" );
 
-    return gulp.src( config.lessAll )
+    return gulp.src( config.lessIndex )
         .pipe( $.plumber() )
         .pipe( $.sourcemaps.init() )
         .pipe( $.less() )
-        .pipe( $.autoprefixer( { browsers: ["last 2 version"] } ) )
+        .pipe( $.autoprefixer( { browsers: ["last 8 version"] } ) )
         .pipe( $.rename( function( path ) {
             path.dirname = path.dirname.toLowerCase();
             path.basename = path.basename.charAt( 0 ).toLowerCase() + path.basename.slice( 1 );
@@ -103,7 +103,7 @@ gulp.task( "clean-generated-js", function() {
 } );
 gulp.task( "clean-generated-css", function() {
     log( "Cleaning up generated CSS" );
-    return gulp.src( config.cssAll )
+    return gulp.src( [config.cssAll, config.cssAllMap] )
         .pipe( $.clean() );
 } );
 
@@ -170,6 +170,15 @@ gulp.task( "wiredep", function() {
     var less = gulp.src( [config.lessIndex] )
         .pipe( wiredepStream( {} ) )
         .pipe( gulp.dest( config.lessRoot ) );
+
+    for ( var destDir in config.bowerComponents ) {
+        if ( config.bowerComponents.hasOwnProperty( destDir ) ) {
+            var c = config.bowerComponents[destDir];
+            gulp.src( config.bowerPath + c.src, { base: c.base } )
+                .pipe( $.print() )
+                .pipe( gulp.dest( c.dest ) );
+        }
+    }
 
     return merge( [js, less, copyJs, copyCss] );
 } );

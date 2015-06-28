@@ -1,6 +1,4 @@
-﻿/// <reference path="../../../Tools/Typings/typescriptApp.d.ts"/>
-
-module Blocks.Logger {
+﻿module Blocks.Logger {
     export interface ILogger {
         info: ( message: string, data?: {}, title?: string ) => void;
         error: ( message: string, data?: {}, title?: string ) => void;

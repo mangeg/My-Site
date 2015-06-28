@@ -5,7 +5,8 @@
 // bower:css!
 // endbower!
 
-@color_background: #333;
+@import "Variables";
+@import "SideBar";
 
 * {
     font-family: "Segoe UI", Arial, Helvetica, sans-serif;
@@ -15,24 +16,23 @@ body {
     font-size: 13px;
     line-height: 23px;
     color: #666;
-    background: #111;
     padding-top: 45px;
     -webkit-font-smoothing: antialiased;
 }
 
 a {
-    color: #333;
+    color: @color_background;
     text-decoration: none !important;
 }
 
-    a:hover {
-        color: #888;
-        text-decoration: none;
-    }
+a:hover {
+    color: #888;
+    text-decoration: none;
+}
 
-    a:hover, a:focus, a:active {
-        outline: 0;
-    }
+a:hover, a:focus, a:active {
+    outline: 0;
+}
 
 :focus {
     outline: none;
@@ -43,45 +43,65 @@ a {
 }
 
 .navbar .nav > li > a {
-  font-size: 13px !important;
-  color: #fff !important;
+    font-size: 13px !important;
+    color: #fff !important;
 }
 
-.navbar .navbar-brand{
+.navbar .navbar-brand {
     color: #fff !important;
     margin: 0 1em;
     height: 45px;
 }
 
-.navbar-inverse{
+.navbar-inverse {
     background-color: @color_background;
 }
 
-/* Sidebar */
-.sidebar{
-    width: 230px;
-    float: left;
-    display: block;
-    background: #111;
-    color: #eee;
+/* Mainbar */
+.mainbar {
     position: relative;
+    margin-right: 0;
+    margin-left: @size-sidebar;
+    width: auto;
 
-    .sidebar-inner{
-        display: block;
-        width: 100%;
-        margin: 0 auto;
-        position: absolute;
-        z-index: 60;
-        background: #111;
+    .content {
+        margin: 2em;
     }
+}
 
-    .sidebar-filler {
-        z-index: -1;
-        position: fixed;
+
+.shuffle-animation {
+    &.ng-enter,
+    &.ng-leave {
+        position: absolute;
         top: 0;
         left: 0;
-        height: 100%;
-        background-color: #333;
-        width: 230px;
     }
+
+    &.ng-enter {
+        transition: all .3s ease-out .4s;
+        transform: translate3d(2em, 0, 0);
+        opacity: 0;
+
+        &.ng-enter-active {
+            transform: translate3d(0, 0, 0);
+            opacity: 1;
+        }
+    }
+
+    &.ng-leave {
+        transition: all .3s ease-out;
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+
+        &.ng-leave-active {
+            transform: translate3d(2em, 0, 0);
+            opacity: 0;
+        }
+    }
+}
+
+.view-container {
+    position: relative;
+    height: 1px;
 }
