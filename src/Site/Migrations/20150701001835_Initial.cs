@@ -25,24 +25,24 @@ namespace Site.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
+                    Id = table.Column(type: "nvarchar(450)", nullable: false),
                     ConcurrencyStamp = table.Column(type: "nvarchar(max)", nullable: true),
-                    Id = table.Column(type: "nvarchar(450)", nullable: true),
                     Name = table.Column(type: "nvarchar(max)", nullable: true),
                     NormalizedName = table.Column(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                    table.PrimaryKey("PK_IdentityRole", x => x.Id);
                 });
             migration.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
+                    Id = table.Column(type: "nvarchar(450)", nullable: false),
                     AccessFailedCount = table.Column(type: "int", nullable: false),
                     ConcurrencyStamp = table.Column(type: "nvarchar(max)", nullable: true),
                     Email = table.Column(type: "nvarchar(max)", nullable: true),
                     EmailConfirmed = table.Column(type: "bit", nullable: false),
-                    Id = table.Column(type: "nvarchar(450)", nullable: true),
                     LockoutEnabled = table.Column(type: "bit", nullable: false),
                     LockoutEnd = table.Column(type: "datetimeoffset", nullable: true),
                     NormalizedEmail = table.Column(type: "nvarchar(max)", nullable: true),
@@ -56,23 +56,23 @@ namespace Site.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.PrimaryKey("PK_ApplicationUser", x => x.Id);
                 });
             migration.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    ClaimType = table.Column(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column(type: "nvarchar(max)", nullable: true),
                     Id = table.Column(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGeneration", "Identity"),
+                    ClaimType = table.Column(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column(type: "nvarchar(max)", nullable: true),
                     RoleId = table.Column(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
+                    table.PrimaryKey("PK_IdentityRoleClaim<string>", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                        name: "FK_IdentityRoleClaim<string>_IdentityRole_RoleId",
                         columns: x => x.RoleId,
                         referencedTable: "AspNetRoles",
                         referencedColumn: "Id");
@@ -81,17 +81,17 @@ namespace Site.Migrations
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    ClaimType = table.Column(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column(type: "nvarchar(max)", nullable: true),
                     Id = table.Column(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGeneration", "Identity"),
+                    ClaimType = table.Column(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
+                    table.PrimaryKey("PK_IdentityUserClaim<string>", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
+                        name: "FK_IdentityUserClaim<string>_ApplicationUser_UserId",
                         columns: x => x.UserId,
                         referencedTable: "AspNetUsers",
                         referencedColumn: "Id");
@@ -100,16 +100,16 @@ namespace Site.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column(type: "nvarchar(450)", nullable: true),
+                    LoginProvider = table.Column(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column(type: "nvarchar(max)", nullable: true),
-                    ProviderKey = table.Column(type: "nvarchar(450)", nullable: true),
                     UserId = table.Column(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.PrimaryKey("PK_IdentityUserLogin<string>", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
-                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                        name: "FK_IdentityUserLogin<string>_ApplicationUser_UserId",
                         columns: x => x.UserId,
                         referencedTable: "AspNetUsers",
                         referencedColumn: "Id");
@@ -118,19 +118,19 @@ namespace Site.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    RoleId = table.Column(type: "nvarchar(450)", nullable: true),
-                    UserId = table.Column(type: "nvarchar(450)", nullable: true)
+                    UserId = table.Column(type: "nvarchar(450)", nullable: false),
+                    RoleId = table.Column(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_IdentityUserRole<string>", x => new { x.UserId, x.RoleId });
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
+                        name: "FK_IdentityUserRole<string>_IdentityRole_RoleId",
                         columns: x => x.RoleId,
                         referencedTable: "AspNetRoles",
                         referencedColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+                        name: "FK_IdentityUserRole<string>_ApplicationUser_UserId",
                         columns: x => x.UserId,
                         referencedTable: "AspNetUsers",
                         referencedColumn: "Id");

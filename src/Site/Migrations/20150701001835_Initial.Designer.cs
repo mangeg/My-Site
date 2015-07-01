@@ -7,9 +7,19 @@ using Site.Data;
 namespace Site.Migrations
 {
     [ContextType(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    partial class Initial
     {
-        public override void BuildModel(ModelBuilder builder)
+        public override string Id
+        {
+            get { return "20150701001835_Initial"; }
+        }
+        
+        public override string ProductVersion
+        {
+            get { return "7.0.0-beta5-13549"; }
+        }
+        
+        public override void BuildTargetModel(ModelBuilder builder)
         {
             builder
                 .Annotation("SqlServer:ValueGeneration", "Identity");

@@ -1,5 +1,6 @@
 ﻿namespace Site
 {
+    using System.Linq;
     using Data;
     using Dota2.SteamService;
     using Microsoft.AspNet.Builder;
@@ -7,16 +8,17 @@
     using Microsoft.AspNet.Hosting;
     using Microsoft.AspNet.Mvc;
     using Microsoft.Data.Entity;
-    using Microsoft.Framework.ConfigurationModel;
+    using Microsoft.Framework.Configuration;
     using Microsoft.Framework.DependencyInjection;
     using Microsoft.Framework.Logging;
+    using Microsoft.Framework.Runtime;
     using Newtonsoft.Json.Serialization;
 
     public class Startup
     {
-        public Startup( IHostingEnvironment env )
+        public Startup( IHostingEnvironment env, IApplicationEnvironment appEnv )
         {
-            var config = new Configuration()
+            var config = new ConfigurationBuilder( appEnv.ApplicationBasePath )
                 .AddJsonFile( "config.json" )
                 .AddJsonFile( $"config.{env.EnvironmentName}.json", true );
 
@@ -25,7 +27,7 @@
                 config.AddUserSecrets();
             }
 
-            Configuration = config;
+            Configuration = config.Build();
         }
         public IConfiguration Configuration { get; set; }
         public void ConfigureServices( IServiceCollection services )
@@ -34,17 +36,19 @@
             services.AddMvc().Configure<MvcOptions>(
                 options =>
                 {
-                    var jsonOutFormatter = options.OutputFormatters.InstanceOf<JsonOutputFormatter>();
+                    var jsonOutFormatter = options.OutputFormatters.OfType<JsonOutputFormatter>().First();
                     jsonOutFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
                 } );
-
             services.AddEntityFramework()
                 .AddSqlServer()
                 .AddDbContext<MyContext>(
-                    d => { d.UseSqlServer( Configuration["Data:DefaultConnection:ConnectionString"] ); } );
+                    d =>
+                    {
+                        d.UseSqlServer( Configuration["Data:DefaultConnection:ConnectionString"] );
+                    } );
 
-            services.Configure<SteamServiceOptions>( Configuration.GetSubKey( "AppSettings" ) );
+            services.Configure<SteamServiceOptions>( Configuration.GetConfigurationSection( "AppSettings" ) );
             services.AddTransient<IDotaService, DotaService>();
         }
 
