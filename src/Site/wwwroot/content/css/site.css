@@ -6929,6 +6929,22 @@ button.close {
 .sidebar ul i {
   margin-right: 5px;
 }
+.ws-grid-item {
+  background-color: #1d1;
+  border: solid 1px black;
+}
+.gridster-preview-holder .gridster-preview-holder .gridster-preview-holder {
+  display: block;
+  z-index: 1;
+  position: absolute;
+  background-color: red;
+  border-color: #fff;
+  opacity: 0.5;
+  -webkit-transition: width .2s, height .3s;
+  transition: width .2s, height .3s;
+  -webkit-transition-delay: 50ms;
+  transition-delay: 50ms;
+}
 * {
   font-family: "Segoe UI", Arial, Helvetica, sans-serif;
 }

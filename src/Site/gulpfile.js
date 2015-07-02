@@ -37,7 +37,7 @@ gulp.task( "watch-ts", function() {
 } );
 gulp.task( "watch-less", function() {
     log( "Watching for LESS changes..." );
-    $.watch( config.lessAll, { verbose: true, name: "LESS-W" }, function( event ) {
+    $.watch( [config.lessAll, config.appLess], { verbose: true, name: "LESS-W" }, function( event ) {
         gulp.start( "compile-less" );
     } );
 } );
@@ -171,16 +171,27 @@ gulp.task( "wiredep", function() {
         .pipe( wiredepStream( {} ) )
         .pipe( gulp.dest( config.lessRoot ) );
 
+    console.log( config.appLess );
+    var lessSources = gulp.src( [config.appLess], { read: false } );
+    var appLess = gulp.src( [config.lessIndex] )
+        .pipe( $.inject( lessSources, {
+            starttag: "// inject:less",
+            endtag: "// endinject",
+            transform: function( filepath ) {
+                return "@import \"../.." + filepath + "\";";
+            }
+        } ) )
+        .pipe( gulp.dest( "./Content/Less/" ) );
+
     for ( var destDir in config.bowerComponents ) {
         if ( config.bowerComponents.hasOwnProperty( destDir ) ) {
             var c = config.bowerComponents[destDir];
             gulp.src( config.bowerPath + c.src, { base: c.base } )
-                .pipe( $.print() )
                 .pipe( gulp.dest( c.dest ) );
         }
     }
 
-    return merge( [js, less, copyJs, copyCss] );
+    return merge( [js, less, copyJs, copyCss, appLess] );
 } );
 
 gulp.task( "build", $.sequence( "clean", ["compile", "ts-lint", "gen-ts-refs"], "inject", "wiredep" ) );

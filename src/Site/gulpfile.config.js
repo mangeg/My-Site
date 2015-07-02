@@ -17,6 +17,7 @@
          */
         this.lessRoot = "./Content/Less/";
         this.lessAll = this.lessRoot + "**/*.less";
+        this.appLess = "./App/**/*.less";
         this.lessIndex = this.lessRoot + "Site.less";
 
         /*

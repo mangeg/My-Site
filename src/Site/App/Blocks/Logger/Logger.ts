@@ -1,4 +1,5 @@
 ﻿module Blocks.Logger {
+
     export interface ILogger {
         info: ( message: string, data?: {}, title?: string ) => void;
         error: ( message: string, data?: {}, title?: string ) => void;
@@ -8,12 +9,12 @@
     }
 
     export class Logger implements ILogger {
-        static $inject: Array<string> = ["$log", "toastr"];
 
+        static $inject: Array<string> = ["$log", "toastr"];
         constructor(private $log: ng.ILogService, private toastr: Toastr) {
         }
 
-        log( ...args: any[] ) {
+        log( ...args: any[] ): void {
             this.$log.log( args );
         }
 
