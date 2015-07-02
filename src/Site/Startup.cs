@@ -2,7 +2,6 @@
 {
     using System.Linq;
     using Data;
-    using Dota2.SteamService;
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Diagnostics;
     using Microsoft.AspNet.Hosting;
@@ -48,8 +47,8 @@
                         d.UseSqlServer( Configuration["Data:DefaultConnection:ConnectionString"] );
                     } );
 
-            services.Configure<SteamServiceOptions>( Configuration.GetConfigurationSection( "AppSettings" ) );
-            services.AddTransient<IDotaService, DotaService>();
+            /*services.Configure<SteamServiceOptions>( Configuration.GetConfigurationSection( "AppSettings" ) );
+            services.AddTransient<IDotaService, DotaService>();*/
         }
 
         public void Configure( IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory )
@@ -62,8 +61,6 @@
                 app.UseErrorPage( ErrorPageOptions.ShowAll );
             }
 
-            app.UseStaticFiles();
-
             app.UseMvc(
                 routes =>
                 {
@@ -72,6 +69,8 @@
                         "{*url}",
                         new { controller = "Home", action = "Index" } );
                 } );
+
+            //app.UseStaticFiles();
         }
     }
 }

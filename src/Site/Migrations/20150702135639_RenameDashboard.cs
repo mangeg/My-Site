@@ -5,12 +5,13 @@ using Microsoft.Data.Entity.Relational.Migrations.Operations;
 
 namespace Site.Migrations
 {
-    public partial class AddWidgets : Migration
+    public partial class RenameDashboard : Migration
     {
         public override void Up(MigrationBuilder migration)
         {
+            migration.DropTable("Hero");
             migration.CreateTable(
-                name: "Dashboard",
+                name: "Dashboard_Dashboard",
                 columns: table => new
                 {
                     Id = table.Column(type: "int", nullable: false)
@@ -22,7 +23,7 @@ namespace Site.Migrations
                     table.PrimaryKey("PK_Dashboard", x => x.Id);
                 });
             migration.CreateTable(
-                name: "Widget",
+                name: "Dashboard_Widget",
                 columns: table => new
                 {
                     Id = table.Column(type: "int", nullable: false)
@@ -40,15 +41,27 @@ namespace Site.Migrations
                     table.ForeignKey(
                         name: "FK_Widget_Dashboard_DashboardId",
                         columns: x => x.DashboardId,
-                        referencedTable: "Dashboard",
+                        referencedTable: "Dashboard_Dashboard",
                         referencedColumn: "Id");
                 });
         }
         
         public override void Down(MigrationBuilder migration)
         {
-            migration.DropTable("Dashboard");
-            migration.DropTable("Widget");
+            migration.DropTable("Dashboard_Dashboard");
+            migration.DropTable("Dashboard_Widget");
+            migration.CreateTable(
+                name: "Hero",
+                columns: table => new
+                {
+                    Id = table.Column(type: "int", nullable: false),
+                    LocalizedName = table.Column(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Hero", x => x.Id);
+                });
         }
     }
 }

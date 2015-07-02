@@ -7,11 +7,11 @@ using Site.Data;
 namespace Site.Migrations
 {
     [ContextType(typeof(MyContext))]
-    partial class AddWidgets
+    partial class RenameDashboard
     {
         public override string Id
         {
-            get { return "20150701232833_AddWidgets"; }
+            get { return "20150702135639_RenameDashboard"; }
         }
         
         public override string ProductVersion
@@ -23,18 +23,6 @@ namespace Site.Migrations
         {
             builder
                 .Annotation("SqlServer:ValueGeneration", "Identity");
-            
-            builder.Entity("Dota2.SteamService.Hero", b =>
-                {
-                    b.Property<int>("Id")
-                        .GenerateValueOnAdd();
-                    
-                    b.Property<string>("LocalizedName");
-                    
-                    b.Property<string>("Name");
-                    
-                    b.Key("Id");
-                });
             
             builder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRole", b =>
                 {
@@ -163,6 +151,8 @@ namespace Site.Migrations
                     b.Property<string>("Name");
                     
                     b.Key("Id");
+                    
+                    b.Annotation("Relational:TableName", "Dashboard_Dashboard");
                 });
             
             builder.Entity("Site.Data.Widget", b =>
@@ -184,6 +174,8 @@ namespace Site.Migrations
                     b.Property<string>("Title");
                     
                     b.Key("Id");
+                    
+                    b.Annotation("Relational:TableName", "Dashboard_Widget");
                 });
             
             builder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
