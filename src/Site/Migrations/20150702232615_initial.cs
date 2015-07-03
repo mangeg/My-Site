@@ -5,22 +5,10 @@ using Microsoft.Data.Entity.Relational.Migrations.Operations;
 
 namespace Site.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         public override void Up(MigrationBuilder migration)
         {
-            migration.CreateTable(
-                name: "Hero",
-                columns: table => new
-                {
-                    Id = table.Column(type: "int", nullable: false),
-                    LocalizedName = table.Column(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Hero", x => x.Id);
-                });
             migration.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -57,6 +45,18 @@ namespace Site.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ApplicationUser", x => x.Id);
+                });
+            migration.CreateTable(
+                name: "Dashboard_Dashboard",
+                columns: table => new
+                {
+                    Id = table.Column(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGeneration", "Identity"),
+                    Name = table.Column(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dashboard", x => x.Id);
                 });
             migration.CreateTable(
                 name: "AspNetRoleClaims",
@@ -135,17 +135,40 @@ namespace Site.Migrations
                         referencedTable: "AspNetUsers",
                         referencedColumn: "Id");
                 });
+            migration.CreateTable(
+                name: "Dashboard_Widget",
+                columns: table => new
+                {
+                    Id = table.Column(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGeneration", "Identity"),
+                    ColX = table.Column(type: "int", nullable: false),
+                    ColY = table.Column(type: "int", nullable: false),
+                    DashboardId = table.Column(type: "int", nullable: false),
+                    SizeX = table.Column(type: "int", nullable: false),
+                    SizeY = table.Column(type: "int", nullable: false),
+                    Title = table.Column(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Widget", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Widget_Dashboard_DashboardId",
+                        columns: x => x.DashboardId,
+                        referencedTable: "Dashboard_Dashboard",
+                        referencedColumn: "Id");
+                });
         }
         
         public override void Down(MigrationBuilder migration)
         {
-            migration.DropTable("Hero");
             migration.DropTable("AspNetRoles");
             migration.DropTable("AspNetRoleClaims");
             migration.DropTable("AspNetUserClaims");
             migration.DropTable("AspNetUserLogins");
             migration.DropTable("AspNetUserRoles");
             migration.DropTable("AspNetUsers");
+            migration.DropTable("Dashboard_Dashboard");
+            migration.DropTable("Dashboard_Widget");
         }
     }
 }

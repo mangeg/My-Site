@@ -7,11 +7,11 @@ using Site.Data;
 namespace Site.Migrations
 {
     [ContextType(typeof(MyContext))]
-    partial class RenameDashboard
+    partial class initial
     {
         public override string Id
         {
-            get { return "20150702135639_RenameDashboard"; }
+            get { return "20150702232615_initial"; }
         }
         
         public override string ProductVersion

@@ -3,9 +3,9 @@
   "version": -9996,
   "targets": {
     "DNX,Version=v4.5.1": {
-      "EntityFramework/7.0.0-beta6-13428": {
+      "EntityFramework/7.0.0-beta6-13665": {
         "dependencies": {
-          "EntityFramework.Commands": "7.0.0-beta6-13428"
+          "EntityFramework.Commands": "7.0.0-beta6-13665"
         }
       },
       "EntityFramework.Commands/7.0.0-beta5": {
@@ -1378,12 +1378,12 @@
     }
   },
   "libraries": {
-    "EntityFramework/7.0.0-beta6-13428": {
-      "sha512": "5J8X6Bha0jLt9XzsIMS+qjRHx3QCBHsoU9KNvBi0+SctZqq6YNqzR6+2L0Rw7rYnjGgVUjkyZMUMjWydEZvqBA==",
+    "EntityFramework/7.0.0-beta6-13665": {
+      "sha512": "lvJmssZUp5vrb4tWdmTLISpzBKFkKGpFfpmVhFvrNaJvpJ2Vv4sVhylCYNpGsTo7sedb8lgFzNco3ndyucL4AQ==",
       "files": [
         "caution.png",
-        "EntityFramework.7.0.0-beta6-13428.nupkg",
-        "EntityFramework.7.0.0-beta6-13428.nupkg.sha512",
+        "EntityFramework.7.0.0-beta6-13665.nupkg",
+        "EntityFramework.7.0.0-beta6-13665.nupkg.sha512",
         "EntityFramework.nuspec",
         "readme.html",
         "yes.png",
@@ -2510,7 +2510,7 @@
       "Microsoft.Framework.Runtime.Abstractions >= 1.0.0-beta5",
       "EntityFramework.Commands >= 7.0.0-beta5",
       "Microsoft.AspNet.Identity.EntityFramework >= 3.0.0-beta5",
-      "EntityFramework >= 7.0.0-beta5",
+      "EntityFramework >= 7.0.0-beta6-13665",
       "EntityFramework.SqlServer >= 7.0.0-beta5"
     ],
     "DNX,Version=v4.5.1": []

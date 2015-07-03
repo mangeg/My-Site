@@ -11,6 +11,7 @@
     using Microsoft.Framework.DependencyInjection;
     using Microsoft.Framework.Logging;
     using Microsoft.Framework.Runtime;
+    using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
 
     public class Startup
@@ -37,6 +38,7 @@
                 {
                     var jsonOutFormatter = options.OutputFormatters.OfType<JsonOutputFormatter>().First();
                     jsonOutFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                    jsonOutFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 
                 } );
             services.AddEntityFramework()
@@ -61,6 +63,8 @@
                 app.UseErrorPage( ErrorPageOptions.ShowAll );
             }
 
+            app.UseStaticFiles();
+
             app.UseMvc(
                 routes =>
                 {
@@ -69,8 +73,6 @@
                         "{*url}",
                         new { controller = "Home", action = "Index" } );
                 } );
-
-            //app.UseStaticFiles();
         }
     }
 }
