@@ -18,7 +18,7 @@
         "EntityFramework.Commands": "7.0.0-beta5",
         "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-beta5",
         "EntityFramework": "7.0.0-beta6-13665",
-        "EntityFramework.SqlServer": "7.0.0-beta5"        
+        "EntityFramework.SqlServer": "7.0.0-beta5"                
     },
   "commands": {
     "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:21935",
