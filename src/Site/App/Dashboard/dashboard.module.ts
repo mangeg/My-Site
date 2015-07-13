@@ -3,7 +3,7 @@
 
     angular
         .module( "app.dashboard", [
-            "app.core",
-            "gridster"
-        ] );
+        "app.core",
+        "adf"
+    ] );
 }

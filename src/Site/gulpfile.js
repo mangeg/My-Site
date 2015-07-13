@@ -19,31 +19,32 @@ var tsProj = $.typescript.createProject( {
 gulp.task( "help", $.taskListing );
 gulp.task( "default", ["help"] );
 
-gulp.task( "watch", ["watch-ts", "watch-less", "watch-html"], function() {} );
-gulp.task( "watch-ts", function() {
+gulp.task( "watch", ["watch-ts", "watch-less", "watch-html"], function () { } );
+gulp.task( "watch-ts", function () {
     log( "Watching for TypeScript changes..." );
-    $.watch( config.tsAll, { verbose: true, name: "TS-W" }, function( event ) {
+    $.watch( config.tsAll, { verbose: true, name: "TS-W" }, function ( event ) {
         if ( event.event === "change" || event.event === "add" ) {
-            if ( event.event === "add" )
-            //gulp.start( $.sequence( "compile-ts", "ts-lint", "gen-ts-refs", "wiredep" ) );
+            if ( event.event === "add" ) {
                 gulp.start( "compile-ts", "ts-lint", "gen-ts-refs", "wiredep" );
-            else
+            }
+            else {
                 gulp.start( "compile-ts", "ts-lint" );
+            }
         }
         if ( event.event === "unlink" ) {
             gulp.start( "build" );
         }
     } );
 } );
-gulp.task( "watch-less", function() {
+gulp.task( "watch-less", function () {
     log( "Watching for LESS changes..." );
-    $.watch( [config.lessAll, config.appLess], { verbose: true, name: "LESS-W" }, function( event ) {
+    $.watch( [config.lessAll, config.appLess], { verbose: true, name: "LESS-W" }, function ( event ) {
         gulp.start( "compile-less" );
     } );
 } );
-gulp.task( "watch-html", function() {
+gulp.task( "watch-html", function () {
     log( "Watching HTML-file changes..." );
-    $.watch( config.htmlAll, { verbose: true, name: "HTML-W" }, function( event ) {
+    $.watch( config.htmlAll, { verbose: true, name: "HTML-W" }, function ( event ) {
         if ( event.event !== "unlink" ) {
             gulp.src( event.path, { base: "./App" } )
                 .pipe( gulp.dest( config.jsAppRoot ) );
@@ -51,11 +52,11 @@ gulp.task( "watch-html", function() {
     } );
 } );
 
-gulp.task( "compile", ["compile-ts", "compile-less"], function() {
+gulp.task( "compile", ["compile-ts", "compile-less"], function () {
     return gulp.src( config.htmlAll )
         .pipe( gulp.dest( config.jsAppRoot ) );
 } );
-gulp.task( "compile-ts", function() {
+gulp.task( "compile-ts", function () {
     log( "Compiling TypeScript => JavaScript" );
 
     var compile = gulp.src( config.tsAllApp )
@@ -67,7 +68,7 @@ gulp.task( "compile-ts", function() {
         compile.dts.pipe( gulp.dest( config.tsTypings ) ),
         compile.js
         .pipe( $.plumber() )
-        .pipe( $.rename( function( path ) {
+        .pipe( $.rename( function ( path ) {
             path.dirname = path.dirname.toLowerCase();
             path.basename = path.basename.charAt( 0 ).toLowerCase() + path.basename.slice( 1 );
         } ) )
@@ -75,7 +76,7 @@ gulp.task( "compile-ts", function() {
         .pipe( gulp.dest( config.jsAppRoot ) )
     ] );
 } );
-gulp.task( "compile-less", function() {
+gulp.task( "compile-less", function () {
     log( "Compiling LESS => CSS" );
 
     return gulp.src( config.lessIndex )
@@ -83,7 +84,7 @@ gulp.task( "compile-less", function() {
         .pipe( $.sourcemaps.init() )
         .pipe( $.less() )
         .pipe( $.autoprefixer( { browsers: ["last 8 version"] } ) )
-        .pipe( $.rename( function( path ) {
+        .pipe( $.rename( function ( path ) {
             path.dirname = path.dirname.toLowerCase();
             path.basename = path.basename.charAt( 0 ).toLowerCase() + path.basename.slice( 1 );
         } ) )
@@ -91,23 +92,23 @@ gulp.task( "compile-less", function() {
         .pipe( gulp.dest( config.cssRoot ) );
 } );
 
-gulp.task( "clean", ["clean-generated-js", "clean-generated-css"], function() {
+gulp.task( "clean", ["clean-generated-js", "clean-generated-css"], function () {
     log( "Cleaning generated HTML" );
     return gulp.src( config.htmlGenerated )
         .pipe( $.clean() );
 } );
-gulp.task( "clean-generated-js", function() {
+gulp.task( "clean-generated-js", function () {
     log( "Cleaning up generated JS" );
     return gulp.src( config.jsAllGenerated )
         .pipe( $.clean() );
 } );
-gulp.task( "clean-generated-css", function() {
+gulp.task( "clean-generated-css", function () {
     log( "Cleaning up generated CSS" );
     return gulp.src( [config.cssAll, config.cssAllMap] )
         .pipe( $.clean() );
 } );
 
-gulp.task( "ts-lint", function() {
+gulp.task( "ts-lint", function () {
     log( "Running TypeScript lint" );
     return gulp.src( config.tsAll )
         .pipe( $.tslint() )
@@ -116,23 +117,23 @@ gulp.task( "ts-lint", function() {
         } ) );
 } );
 
-gulp.task( "gen-ts-refs", function() {
+gulp.task( "gen-ts-refs", function () {
     log( "Generating TypeScript app references" );
     var target = gulp.src( config.tsTypingsAppReference );
     var sources = gulp.src( [config.tsAllApp], { read: false } );
     return target
         .pipe( $.inject( sources, {
-                starttag: "//{",
-                endtag: "//}",
-                transform: function( filepath ) {
-                    return "/// <reference path='../.." + filepath + "' />";
-                }
-            } )
+            starttag: "//{",
+            endtag: "//}",
+            transform: function ( filepath ) {
+                return "/// <reference path='../.." + filepath + "' />";
+            }
+        } )
         )
         .pipe( gulp.dest( config.tsTypings ) );
 } );
 
-gulp.task( "inject", function() {
+gulp.task( "inject", function () {
 
     var target = gulp.src( config.index );
     var sources = gulp.src( config.cssAll, { read: false } );
@@ -143,7 +144,7 @@ gulp.task( "inject", function() {
 
 } );
 
-gulp.task( "wiredep", function() {
+gulp.task( "wiredep", function () {
     var wiredep = require( "wiredep" );
     var wiredepStream = wiredep.stream;
 
@@ -177,7 +178,7 @@ gulp.task( "wiredep", function() {
         .pipe( $.inject( lessSources, {
             starttag: "// inject:less",
             endtag: "// endinject",
-            transform: function( filepath ) {
+            transform: function ( filepath ) {
                 return "@import \"../.." + filepath + "\";";
             }
         } ) )
