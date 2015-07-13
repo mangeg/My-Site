@@ -1,13 +1,10 @@
 /// <reference path="tsd.d.ts" />
 //{
 /// <reference path='../../App/App.module.ts' />
-/// <reference path='../../App/Dashboard/dashboard.controller.ts' />
-/// <reference path='../../App/Dashboard/dashboard.module.ts' />
-/// <reference path='../../App/Dashboard/dashboard.route.ts' />
 /// <reference path='../../App/Core/Config.ts' />
 /// <reference path='../../App/Core/Constants.ts' />
 /// <reference path='../../App/Core/Core.module.ts' />
-/// <reference path='../../App/Core/core.router.ts' />
+/// <reference path='../../App/Core/Core.router.ts' />
 /// <reference path='../../App/Dashboard/dashboard.controller.ts' />
 /// <reference path='../../App/Dashboard/dashboard.module.ts' />
 /// <reference path='../../App/Dashboard/dashboard.route.ts' />

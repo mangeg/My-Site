@@ -1,9 +1,6 @@
 ﻿namespace Site
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.InteropServices;
     using System.Threading.Tasks;
     using Data;
     using Microsoft.AspNet.Builder;
@@ -11,15 +8,10 @@
     using Microsoft.AspNet.Hosting;
     using Microsoft.AspNet.Http;
     using Microsoft.AspNet.Mvc;
-    using Microsoft.AspNet.Routing;
-    using Microsoft.AspNet.Routing.Constraints;
-    using Microsoft.AspNet.Routing.Template;
-    using Microsoft.AspNet.StaticFiles;
     using Microsoft.Data.Entity;
     using Microsoft.Framework.Configuration;
     using Microsoft.Framework.DependencyInjection;
     using Microsoft.Framework.Logging;
-    using Microsoft.Framework.OptionsModel;
     using Microsoft.Framework.Runtime;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
@@ -49,15 +41,11 @@
                     var jsonOutFormatter = options.OutputFormatters.OfType<JsonOutputFormatter>().First();
                     jsonOutFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                     jsonOutFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-
                 } );
             services.AddEntityFramework()
                 .AddSqlServer()
                 .AddDbContext<MyContext>(
-                    d =>
-                    {
-                        d.UseSqlServer( Configuration["Data:DefaultConnection:ConnectionString"] );
-                    } );
+                    d => { d.UseSqlServer( Configuration["Data:DefaultConnection:ConnectionString"] ); } );
 
             /*services.Configure<SteamServiceOptions>( Configuration.GetConfigurationSection( "AppSettings" ) );
             services.AddTransient<IDotaService, DotaService>();*/
