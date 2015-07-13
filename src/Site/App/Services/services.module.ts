@@ -1,4 +1,4 @@
-﻿((): void => {
+﻿( (): void => {
     angular
         .module( ( "app.services" ), [] );
-})()
+} )();

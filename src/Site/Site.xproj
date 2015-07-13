@@ -18,6 +18,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <DevelopmentServerPort>21935</DevelopmentServerPort>
     <GruntGulpQueried>True</GruntGulpQueried>
+    <SSLPort>44300</SSLPort>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <ProduceOutputsOnBuild>False</ProduceOutputsOnBuild>

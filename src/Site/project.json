@@ -21,7 +21,7 @@
         "EntityFramework.SqlServer": "7.0.0-beta5"                
     },
   "commands": {
-    "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:21935",
+    "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls https://web.local:443",
     "ef": "EntityFramework.Commands"
   },
   "frameworks": {
